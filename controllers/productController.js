@@ -4,7 +4,6 @@ const ObjectId = require('mongodb').ObjectId;
 const fetchProducts = async (req, res) => {
     try {
         const products = await Product.find()
-        console.log(products)
         res.status(200).json(products)
     } catch (error) {
         console.log(error)
@@ -29,27 +28,27 @@ const getProduct = async (req, res) => {
 const postProduct = async (req, res) => {
     try {
 
-        const { title, details, price, discount, rating, productId,images } = req.body;
-
+        const { title, details, price, discount, rating, productId } = req.body;
+        console.log(req.body)
         // console.log(req.files)
 
-        if ( !req.body.title || !req.body.details || !req.body.price || !req.body.discount || !req.body.rating || !req.body.productId || !req.body.images ) {
+        if ( !req.body.title || !req.body.details || !req.body.price || !req.body.discount || !req.body.rating || !req.body.productId ) {
             res.status(400).json({ message: 'you should fill required feilds' })
             return
         } 
 
-        // if ( !req.files?.length ) {
-        //     res.status(400).json({ message: 'you should add images' })
-        //     return
-        // }
+        if ( !req.files?.length ) {
+            res.status(400).json({ message: 'you should add images' })
+            return
+        }
 
         // Create Images
-        // const images = []
+        const images = []
 
-        // for(let i = 0; i < req.files.length; i++) {
-        //     const path = `http://${req.hostname}:5000/uploads/${req.files[i].filename}`
-        //     images.push(path)
-        // }
+        for(let i = 0; i < req.files.length; i++) {
+            const path = `http://${req.hostname}:5000/uploads/${req.files[i].filename}`
+            images.push(path)
+        }
 
         // Create New Product
         const newProduct = await Product.create({

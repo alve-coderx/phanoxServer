@@ -4,6 +4,7 @@ const  Stripe = require('stripe')
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const handler = async (req, res) => {
+    console.log(req.body)
     try {
         // create a Coupone
         const coupon = await stripe.coupons.create({percent_off: 20, duration: 'once'});
@@ -19,8 +20,7 @@ const handler = async (req, res) => {
             payment_method_types: ['card'],
             billing_address_collection: 'auto',
             shipping_options: [
-                { shipping_rate: 'shr_1LKkl6KmOocwKd6syIYs4ppP' },
-                { shipping_rate: 'shr_1LKkluKmOocwKd6sWURxzU2Z' }
+                { shipping_rate: 'shr_1LiuuAGAKTvokZDbpGZladXr' },
             ],
             line_items: req.body.map((item) => {
                 return {
