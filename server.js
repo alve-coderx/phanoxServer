@@ -18,6 +18,7 @@ app.use('/uploads', express.static('uploads'))
 
 // Routers
 app.use('/products', require('./routers/productRoute'))
+app.use('/petterns', require('./routers/petternRoute'))
 app.use('/create-checkout-session', require('./routers/stripeRoute'))
 
 const io = new Server(server, {
