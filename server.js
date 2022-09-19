@@ -25,12 +25,7 @@ app.use('/create-checkout-session', require('./routers/stripeRoute'))
 app.use(require('./routers/soketRouter'))
 
 
-const io = socketio(server, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"],
-    },
-  });
+const io = socketio(server);
   
   
   io.on('connect', (socket) => {
