@@ -1,8 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const { getSoket } = require('../controllers/soketController')
+const express = require("express");
+const router = express.Router();
 
-router.route('/').get(getSoket)
+router.get("/", (req, res) => {
+  res.send({ response: "Server is up and running." }).status(200);
+});
 
-
-module.exports = router
+module.exports = router;
